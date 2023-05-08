@@ -1,0 +1,3 @@
+D:/JetBrains/CLionProjects/ChipIncomingInspection/cmake-build-debug/CMakeFiles/ChipIncomingInspection.elf.dir
+D:/JetBrains/CLionProjects/ChipIncomingInspection/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/JetBrains/CLionProjects/ChipIncomingInspection/cmake-build-debug/CMakeFiles/rebuild_cache.dir
