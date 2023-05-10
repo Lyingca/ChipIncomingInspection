@@ -26,7 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "LIN.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,7 +53,7 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+void Util_Receive_IT(UART_HandleTypeDef *huart);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -92,9 +92,17 @@ int main(void)
   MX_DMA_Init();
   MX_ADC1_Init();
   MX_TIM3_Init();
-  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  //开启中断接收
+  Util_Receive_IT(&huart2);
+  //使能编码器模式
+  HAL_TIM_Encoder_Start(&htim3,TIM_CHANNEL_1);
+  HAL_TIM_Encoder_Start(&htim3,TIM_CHANNEL_2);
+  //使能TJA1028LIN芯片的EN
+  HAL_GPIO_WritePin(TJA1028_EN_GPIO_Port,TJA1028_EN_Pin,GPIO_PIN_SET);
+  //使能TJA1028LIN芯片的RSTN
+  HAL_GPIO_WritePin(TJA1028_RSTN_GPIO_Port,TJA1028_RSTN_Pin,GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -102,7 +110,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+        //循环发送数据
+        Send_LIN_Data();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -149,7 +158,59 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+/**
+ * 重写接收中断函数
+ */
+void Util_Receive_IT(UART_HandleTypeDef *huart)
+{
+    if(huart == &huart2)
+    {
+        if(HAL_UART_Receive_IT(huart, pLINRxBuff, LIN_RX_MAXSIZE) != HAL_OK)
+        {
+            Error_Handler();
+        }
+    }
+}
 
+/**
+ * 接收完成中断函数，用以在一帧数据接收完成时，对数据进行处理
+ *
+ * @brief Rx Transfer completed callback.
+ * @param huart UART handle.
+ * @retval None
+ */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    //LIN协议
+    if(huart == &huart2)
+    {
+        //测试代码
+        //HAL_UART_Transmit(&huart3, pLINRxBuff, LIN_RX_MAXSIZE, HAL_MAX_DELAY);
+        LIN_Data_Process();
+        //HAL_UART_AbortReceive(&huart2);
+    }
+    Util_Receive_IT(huart);
+}
+
+/**
+ * 重写UART错误中断处理程序，重新开启USART中断
+ *
+ * @brief UART error callback.
+ * @param huart UART handle.
+ * @retval None
+ */
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
+{
+    /* Prevent unused argument(s) compilation warning */
+    //解决串口溢出，导致不断进入串口中断函数，使MCU过载的问题
+    if(HAL_UART_GetError(huart) & HAL_UART_ERROR_ORE)
+    {
+        //清除ORE标志位
+        __HAL_UART_FLUSH_DRREGISTER(huart);
+        Util_Receive_IT(huart);
+        huart->ErrorCode = HAL_UART_ERROR_NONE;
+    }
+}
 /* USER CODE END 4 */
 
 /**

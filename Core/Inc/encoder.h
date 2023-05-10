@@ -1,0 +1,12 @@
+//
+// Created by 陈骏骏 on 2023/5/10.
+//
+
+#ifndef CHIPINCOMINGINSPECTION_ENCODER_H
+#define CHIPINCOMINGINSPECTION_ENCODER_H
+
+#include "main.h"
+
+
+
+#endif //CHIPINCOMINGINSPECTION_ENCODER_H

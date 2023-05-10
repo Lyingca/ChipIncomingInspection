@@ -1,4 +1,4 @@
-set(CMAKE_CXX_COMPILER "D:/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-g++.exe")
+set(CMAKE_CXX_COMPILER "D:/STMicroelectronics/STM32Cube/GNU-Tools-ARM-Embedded/bin/arm-none-eabi-g++.exe")
 set(CMAKE_CXX_COMPILER_ARG1 "")
 set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_COMPILER_VERSION "10.3.1")
@@ -23,10 +23,10 @@ set(CMAKE_CXX_SIMULATE_VERSION "")
 
 
 set(CMAKE_AR "arm-none-eabi-ar")
-set(CMAKE_CXX_COMPILER_AR "D:/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc-ar.exe")
-set(CMAKE_RANLIB "D:/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-ranlib.exe")
-set(CMAKE_CXX_COMPILER_RANLIB "D:/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc-ranlib.exe")
-set(CMAKE_LINKER "D:/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-ld.exe")
+set(CMAKE_CXX_COMPILER_AR "D:/STMicroelectronics/STM32Cube/GNU-Tools-ARM-Embedded/bin/arm-none-eabi-gcc-ar.exe")
+set(CMAKE_RANLIB "D:/STMicroelectronics/STM32Cube/GNU-Tools-ARM-Embedded/bin/arm-none-eabi-ranlib.exe")
+set(CMAKE_CXX_COMPILER_RANLIB "D:/STMicroelectronics/STM32Cube/GNU-Tools-ARM-Embedded/bin/arm-none-eabi-gcc-ranlib.exe")
+set(CMAKE_LINKER "D:/STMicroelectronics/STM32Cube/GNU-Tools-ARM-Embedded/bin/arm-none-eabi-ld.exe")
 set(CMAKE_MT "")
 set(CMAKE_COMPILER_IS_GNUCXX 1)
 set(CMAKE_CXX_COMPILER_LOADED 1)
@@ -77,7 +77,7 @@ endif()
 
 
 
-set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "D:/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/c++/10.3.1;D:/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/c++/10.3.1/arm-none-eabi;D:/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/c++/10.3.1/backward;D:/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include;D:/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include-fixed;D:/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include")
+set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "D:/STMicroelectronics/STM32Cube/GNU-Tools-ARM-Embedded/arm-none-eabi/include/c++/10.3.1;D:/STMicroelectronics/STM32Cube/GNU-Tools-ARM-Embedded/arm-none-eabi/include/c++/10.3.1/arm-none-eabi;D:/STMicroelectronics/STM32Cube/GNU-Tools-ARM-Embedded/arm-none-eabi/include/c++/10.3.1/backward;D:/STMicroelectronics/STM32Cube/GNU-Tools-ARM-Embedded/lib/gcc/arm-none-eabi/10.3.1/include;D:/STMicroelectronics/STM32Cube/GNU-Tools-ARM-Embedded/lib/gcc/arm-none-eabi/10.3.1/include-fixed;D:/STMicroelectronics/STM32Cube/GNU-Tools-ARM-Embedded/arm-none-eabi/include")
 set(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES "")
 set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "")
 set(CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "")
