@@ -5,6 +5,7 @@
 #include <string.h>
 #include "LIN.h"
 #include "usart.h"
+#include "encoder.h"
 
 //LIN同步帧字节
 uint8_t  SYNC_Frame = 0x55;
@@ -188,14 +189,17 @@ void Feedback_Signal(uint8_t signal)
     retries = 0;
     //发送响应数据后表示本次测试结束，清空发送数据缓存
     memset(pLINTxBuff,0,LIN_TX_MAXSIZE);
-
-    if (signal)
+    //判断脉冲数是否正确
+    uint16_t pulse_num = Read_Pulse_Value();
+    uint8_t Pulse_Signal = pulse_num == EXV_Test_Step ? 1 : 0;
+    //判断电机反馈信号和脉冲数是否正确
+    if (signal && Pulse_Signal)
     {
-        //脉冲数正确，亮绿灯
+        //电机无异常，脉冲数正确，亮绿灯
     }
     else
     {
-        //脉冲数不正确不亮绿灯
+        //电机反馈了错误信号或者脉冲数不正确，不亮绿灯
 
     }
 }
@@ -297,6 +301,10 @@ void LIN_Data_Process()
     {
         //计算电机转动步长，步长低字节在前高字节在后
         EXV_Run_Step = (pLINRxBuff[6] << 8) | pLINRxBuff[5];
+        if(EXV_Run_Step == 0)
+        {
+            Encoder_Counter_Clear();
+        }
         if(EXV_Run_Step == EXV_Test_Step)
         {
             Feedback_Signal(EXV_OK);
