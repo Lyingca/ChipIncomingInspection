@@ -217,7 +217,7 @@ uint8_t Check_Chip_Connection()
         {
             count++;
         }
-        if (count >= 2)
+        if (count >= 3)
         {
             return 0;
         }

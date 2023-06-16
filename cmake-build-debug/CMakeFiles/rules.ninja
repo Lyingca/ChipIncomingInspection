@@ -7,14 +7,14 @@
 
 # =============================================================================
 # Project: ChipIncomingInspection
-# Configurations: Debug
+# Configurations: 
 # =============================================================================
 # =============================================================================
 
 #############################################
 # Rule for compiling ASM files.
 
-rule ASM_COMPILER__ChipIncomingInspection.2eelf_Debug
+rule ASM_COMPILER__ChipIncomingInspection.2eelf_
   depfile = $DEP_FILE
   deps = gcc
   command = D:\STMicroelectronics\STM32Cube\GNU-Tools-ARM-Embedded\bin\arm-none-eabi-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -24,7 +24,7 @@ rule ASM_COMPILER__ChipIncomingInspection.2eelf_Debug
 #############################################
 # Rule for compiling C files.
 
-rule C_COMPILER__ChipIncomingInspection.2eelf_Debug
+rule C_COMPILER__ChipIncomingInspection.2eelf_
   depfile = $DEP_FILE
   deps = gcc
   command = D:\STMicroelectronics\STM32Cube\GNU-Tools-ARM-Embedded\bin\arm-none-eabi-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -34,7 +34,7 @@ rule C_COMPILER__ChipIncomingInspection.2eelf_Debug
 #############################################
 # Rule for linking C executable.
 
-rule C_EXECUTABLE_LINKER__ChipIncomingInspection.2eelf_Debug
+rule C_EXECUTABLE_LINKER__ChipIncomingInspection.2eelf_
   command = cmd.exe /C "$PRE_LINK && D:\STMicroelectronics\STM32Cube\GNU-Tools-ARM-Embedded\bin\arm-none-eabi-gcc.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
   description = Linking C executable $TARGET_FILE
   restat = $RESTAT
